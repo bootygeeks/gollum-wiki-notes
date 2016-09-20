@@ -1,0 +1,127 @@
+#!/bin/sh
+#
+# gollum-server:jeff
+#
+# Cross-platform init.d script; Mac OS X, FreeBSD and Linux
+
+CWD=$(pwd)
+
+KILL_BIN=$(which kill)
+DAEMON_BIN="${HOME}/.rbenv/shims/gollum"
+
+SCRIPT_NAME="$(basename "${0}")"
+
+# This allows non-root privileges when in use.
+# shellcheck disable=SC2034
+SUDO_BIN=$(which sudo)
+
+# The user privileges to use when using sudo
+# USER="jeff"
+# GROUP="staff"
+
+# Source environment variables in .env
+CONFIG_FILE="${CWD}/.env"
+if [ -e "${CONFIG_FILE}" ]; then
+  # shellcheck disable=SC1090
+  . "${CONFIG_FILE}"
+else
+  echo "${SCRIPT_NAME} ERROR: Failed to source environment configuration at ${CONFIG_FILE}"
+  exit -1
+fi
+
+debug_info() {
+  if [ -n "${GOLLUM_DEBUG}" ]; then
+    printf "WIKI_ROOT:\n %s\n" "${WIKI_ROOT}"
+    printf "LOG_FILE:\n %s\n" "${LOG_FILE}"
+    printf "PID_FILE:\n %s\n" "${PID_FILE}"
+    printf "DAEMON_BIN:\n %s\n" "${DAEMON_BIN}"
+    printf "\n"
+    printf "GOLLUM_CONFIG:\n %s\n" "${CONFIG_FILE}"
+    printf "\n"
+    printf "HOST:\n %s\n" "${GOLLUM_HOST}"
+    printf "\n"
+    printf "PORT:\n %s\n" "${GOLLUM_PORT}"
+    printf "\n"
+    printf "GOLLUM_AUTHORIZED_USERS:\n %s\n" "${GOLLUM_AUTHORIZED_USERS}"
+    printf "\n"
+    printf "USER:\n %s\n" "${USER}"
+    printf "GROUP:\n %s\n" "${GROUP}"
+    printf "\n"
+    printf "EXEC:\n %s\n" "${DAEMON_BIN} --config ${GOLLUM_CONFIG} > ${LOG_FILE} &"
+  fi
+}
+
+usage_info() {
+  echo "Usage: {GOLLUM_DEBUG=true} ./${SCRIPT_NAME} {start|stop|restart|status}"
+}
+
+start_gollum() {
+  if [ -e "${PID_FILE}" ]; then
+    PID=$(cat "${PID_FILE}")
+
+    echo "${SCRIPT_NAME} INFO: Stopping an existing Gollum process at $PID"
+    $KILL_BIN -s TERM "$(cat "${PID_FILE}")"
+    rm -f "${PID_FILE}"
+  fi
+
+  debug_info
+
+  # shellcheck disable=SC2164
+  # cd "${WIKI_ROOT}"
+  # if [ $? != 0 ]; then
+  #   echo "${SCRIPT_NAME} ERROR: Failed to chdir to ${WIKI_ROOT}"
+  #   exit -2
+  # fi
+
+  # ${SUDO_BIN} -u ${USER} -g ${GROUP} ${DAEMON_BIN} --config ${GOLLUM_CONFIG} > ${LOG_FILE} &
+  # ${DAEMON_BIN} --config "${GOLLUM_CONFIG}" > "${LOG_FILE}"
+  bundle exec rackup "${GOLLUM_CONFIG}" > "${LOG_FILE}" 2>&1 &
+}
+
+stop_gollum() {
+  if [ -e "${PID_FILE}" ]; then
+    PID=$(cat "${PID_FILE}")
+
+    echo "${SCRIPT_NAME} INFO: Stopping an existing Gollum process at ${PID}"
+    $KILL_BIN -s TERM "${PID}"
+    rm -f "${PID_FILE}"
+  else
+    echo "${SCRIPT_NAME} ERROR: No existing Gollum process to stop."
+  fi
+}
+
+status_gollum() {
+  if [ -e "${PID_FILE}" ]; then
+    PID=$(cat "${PID_FILE}")
+    echo "${SCRIPT_NAME} INFO: Active Gollum process at process ID ${PID}"
+  else
+    echo "${SCRIPT_NAME} INFO: No active Gollum process."
+  fi
+}
+
+case "$1" in
+  start)
+    echo "Starting Gollum..."
+    start_gollum
+    exit 0
+  ;;
+  stop)
+    echo "...Stopping Gollum"
+    stop_gollum
+  ;;
+  status)
+    status_gollum
+  ;;
+  restart)
+    echo "...Restarting Gollum..."
+    stop_gollum
+    sleep 2
+    start_gollum
+    status_gollum
+  ;;
+  *)
+    usage_info
+  ;;
+esac
+
+exit 0

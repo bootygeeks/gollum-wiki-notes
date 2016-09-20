@@ -1,0 +1,13 @@
+.babelrc
+.env
+design
+gulpfile.babel.js
+logs
+keys
+node_modules
+notes.pid
+package.json
+public
+*.sublime-workspace
+tmp
+
