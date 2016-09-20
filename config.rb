@@ -16,6 +16,8 @@ ENV_PID_FILE = ENV["PID_FILE"] ||= './notes.pid'
 ENV_GIT_ROOT = ENV["GIT_ROOT"] ||=
   File.expand_path(File.join(File.dirname(__FILE__), 'notes.git'))
 
+ENV_BARE_GIT_ROOT = ENV["BARE_GIT_ROOT"] ||= false
+
 # Net server options
 ENV_HOST = ENV["GOLLUM_HOST"] ||= '0.0.0.0'
 ENV_PORT = ENV["GOLLUM_PORT"] ||= '4567'
@@ -46,7 +48,7 @@ WIKI_OPTIONS = {
   :mathjax => true,
   :h1_title => true,
   :universal_toc => false,
-  :repo_is_bare => false
+  :repo_is_bare => ENV_BARE_GIT_ROOT
 }
 
 SERVER_OPTIONS = {

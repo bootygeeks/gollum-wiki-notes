@@ -32,6 +32,7 @@ fi
 debug_info() {
   if [ -n "${GOLLUM_DEBUG}" ]; then
     printf "GIT_ROOT:\n %s\n" "${GIT_ROOT}"
+    printf "BARE_GIT_ROOT:\n %s\n" "${BARE_GIT_ROOT}"
     printf "LOG_FILE:\n %s\n" "${LOG_FILE}"
     printf "PID_FILE:\n %s\n" "${PID_FILE}"
     printf "DAEMON_BIN:\n %s\n" "${DAEMON_BIN}"
