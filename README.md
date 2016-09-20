@@ -11,6 +11,7 @@ when being installed on FreeBSD,
 
     bundle install
 
+    tail -f logs/notes.log
     gollum-server
 
 ### Development
@@ -26,3 +27,4 @@ when being installed on FreeBSD,
 - [ ] Move project source files to ```src```
 - [ ] Rename ```public``` to ```dist```
 - [ ] Finish up gulp file for browser sync and so forth
+- [ ] Consider removing config.rb ..?
