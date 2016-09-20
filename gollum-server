@@ -76,6 +76,7 @@ start_gollum() {
 
   # ${SUDO_BIN} -u ${USER} -g ${GROUP} ${DAEMON_BIN} --config ${GOLLUM_CONFIG} > ${LOG_FILE} &
   # ${DAEMON_BIN} --config "${GOLLUM_CONFIG}" > "${LOG_FILE}"
+  mkdir -p logs
   bundle exec rackup "${GOLLUM_CONFIG}" > "${LOG_FILE}" 2>&1 &
 }
 
