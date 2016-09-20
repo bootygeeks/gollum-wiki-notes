@@ -2,13 +2,15 @@ README.md
 
 # Gollum Wiki Notes
 
+    git clone https://github.com/i8degrees-net/gollum-wiki-notes gollum-wiki-notes.git
+
 ## Usage
 
 **IMPORTANT(jeff):** charlock_holmes needs to be installed with the following
 when being installed on FreeBSD,
 
+    gem install bundle
     gem install charlock_holmes -- --with-icu-include=/usr/local/include --with-icuil18nlib=/usr/local/lib --with-icu-lib=/usr/local/lib
-
     bundle install
 
     tail -f logs/notes.log
