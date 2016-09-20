@@ -13,7 +13,7 @@ Dotenv.load
 ENV_PID_FILE = ENV["PID_FILE"] ||= './notes.pid'
 
 # Notes repo root
-ENV_WIKI_ROOT = ENV["WIKI_ROOT"] ||=
+ENV_GIT_ROOT = ENV["GIT_ROOT"] ||=
   File.expand_path(File.join(File.dirname(__FILE__), 'notes.git'))
 
 # Net server options

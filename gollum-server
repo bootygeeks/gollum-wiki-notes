@@ -31,7 +31,7 @@ fi
 
 debug_info() {
   if [ -n "${GOLLUM_DEBUG}" ]; then
-    printf "WIKI_ROOT:\n %s\n" "${WIKI_ROOT}"
+    printf "GIT_ROOT:\n %s\n" "${GIT_ROOT}"
     printf "LOG_FILE:\n %s\n" "${LOG_FILE}"
     printf "PID_FILE:\n %s\n" "${PID_FILE}"
     printf "DAEMON_BIN:\n %s\n" "${DAEMON_BIN}"
@@ -67,9 +67,9 @@ start_gollum() {
   debug_info
 
   # shellcheck disable=SC2164
-  # cd "${WIKI_ROOT}"
+  # cd "${GIT_ROOT}"
   # if [ $? != 0 ]; then
-  #   echo "${SCRIPT_NAME} ERROR: Failed to chdir to ${WIKI_ROOT}"
+  #   echo "${SCRIPT_NAME} ERROR: Failed to chdir to ${GIT_ROOT}"
   #   exit -2
   # fi
 

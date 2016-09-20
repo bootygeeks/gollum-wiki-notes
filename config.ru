@@ -23,7 +23,7 @@ File.open(ENV_PID_FILE, 'w') {
 
 # :omnigollum options *must* be set before the Omnigollum extension is
 # registered
-Precious::App.set(:gollum_path, ENV_WIKI_ROOT)
+Precious::App.set(:gollum_path, ENV_GIT_ROOT)
 Precious::App.set(:wiki_options, WIKI_OPTIONS)
 Precious::App.set(:omnigollum, AUTH_OPTIONS)
 Precious::App.register Omnigollum::Sinatra
