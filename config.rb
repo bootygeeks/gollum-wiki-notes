@@ -86,16 +86,17 @@ AUTH_OPTIONS = {
 
   # Pages that require user authentication; see also: :authorized_users
   :protected_routes => [
-    '/revert/*',
-    '/revert',
-    '/create/*',
-    '/create',
-    '/edit/*',
-    '/edit',
-    '/rename/*',
-    '/rename',
-    '/delete/*',
-    '/delete'
+    '/*'
+    # '/revert/*',
+    # '/revert',
+    # '/create/*',
+    # '/create',
+    # '/edit/*',
+    # '/edit',
+    # '/rename/*',
+    # '/rename',
+    # '/delete/*',
+    # '/delete'
   ],
 
   # Use the authenticated user name and e-mail for the page's commit
