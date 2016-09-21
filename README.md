@@ -22,6 +22,7 @@ when being installed on FreeBSD,
 
 ## TODO
 
+- [ ] rc.d script
 - [ ] Provide a ```.env.defaults``` configuration
 - [ ] Finish [bundle](http://bundler.io/v1.13/man/bundle.1.html) configuration
 - [ ] Setup appropriate error handling for production servers
