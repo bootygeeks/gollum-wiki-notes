@@ -22,7 +22,8 @@ when being installed on FreeBSD,
 
 ## TODO
 
-- [ ] rc.d script
+- [ ] rc.d script and init.d compatible scripts
+  * http://askubuntu.com/questions/294736/run-a-shell-script-as-another-user-that-has-no-password
 - [ ] Provide a ```.env.defaults``` configuration
 - [ ] Finish [bundle](http://bundler.io/v1.13/man/bundle.1.html) configuration
 - [ ] Setup appropriate error handling for production servers
@@ -31,3 +32,43 @@ when being installed on FreeBSD,
 - [ ] Rename ```public``` to ```dist```
 - [ ] Finish up gulp file for browser sync and so forth
 - [ ] Consider removing config.rb ..?
+
+### Imported from SimpleNote
+
+- [ ] take look at gitlab's wiki backend software at https://github.com/gitlabhq/gitlabhq
+
+- [ ] Protect upload files dialog from unauthorized users
+
+- [ ] Share notes by exporting said commit(s) as a gist -- when supported -- or as a plain, flat file.
+
+  - [ ] Use a Markdown converter tool -- i.e.: cmark -- for updating file source links when necessary;
+
+      cmark -t xml /Users/jeff/Projects/notes.git/boobies.md > /tmp/boobies.md
+
+  - [ ] Research HTML or XML parsing with node.js
+
+  - [ ] File sharing can be accomplished many different ways -- everything from a public web server to a personal Dropbox account to even a IMAP store!
+    * https://github.com/andreafabrizi/Dropbox-Uploader.git
+
+- [ ] Experiment with modifying the page via Javascript at run-time
+  * http://blog.branch14.org/2013/05/11/a-custom-wiki-with-gollum.html
+
+- [ ] Relocate the partial usage guide at https://wiki.imbue.studio/wiki concerning
+the wiki backend to this file.
+
+## References
+
+* https://eureka.ykyuen.info/2015/03/11/gollum-add-git-identity-by-running-gollum-as-a-rack-appliaction/
+
+* http://msimav.net/2013/08/01/gollum-a-lightweight-wiki/
+
+* http://stackoverflow.com/questions/13053704/how-to-properly-mount-githubs-gollum-wiki-inside-a-rails-app
+
+## Related Projects
+
+* https://github.com/HSBNE/Wiki-GollumRack
+* https://github.com/nog3/Gollum-Rack
+* https://github.com/riskanalytics/gollum-rack
+
+* [Vimwiki](https://github.com/vimwiki/vimwiki)
+* [notes.vim](http://peterodding.com/code/vim/notes/)
