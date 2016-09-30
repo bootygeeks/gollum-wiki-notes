@@ -2,23 +2,53 @@ README.md
 
 # Gollum Wiki Notes
 
-    git clone https://github.com/i8degrees-net/gollum-wiki-notes gollum-wiki-notes.git
+    git clone https://github.com/i8degrees-net/gollum-wiki-notes
 
 ## Usage
 
-**IMPORTANT(jeff):** charlock_holmes needs to be installed with the following
-when being installed on FreeBSD,
+* Minimum required version of Ruby is version ```2.3.0```.
 
-    gem install bundle
-    gem install charlock_holmes -- --with-icu-include=/usr/local/include --with-icuil18nlib=/usr/local/lib --with-icu-lib=/usr/local/lib
-    bundle install
+Setup the environment:
+
+```shell
+export RBENV_ROOT=/srv/ruby/rbenv
+eval $(rbenv init -)
+rbenv install 2.3.0
+rbenv local 2.3.0
+```
+
+Server defaults:
+
+```shell
+# Be sure to set these variables up before trying to run the app..!
+cp -av .env.defaults .env
+```
+
+### Mac OS X 
+
+...
+
+### FreeBSD
+
+```shell
+pkg install icu
+```
+
+```shell
+gem install bundle
+# gem install charlock_holmes -- --with-icu-include=/usr/local/include --with-icuil18nlib=/usr/local/lib --with-icu-lib=/usr/local/lib
+bundle check
+bundle install --deployment
+```
+
+### Startup
 
     tail -f logs/notes.log
     gollum-server
 
 ### Development
 
-    npm install
+    bundle install --no-deployment
 
 ## TODO
 
@@ -26,7 +56,7 @@ when being installed on FreeBSD,
   1. http://unix.stackexchange.com/questions/182212/chmod-gs-command
   * https://www.freebsd.org/doc/handbook/fs-acl.html
   * http://askubuntu.com/questions/294736/run-a-shell-script-as-another-user-that-has-no-password
-- [ ] Provide a ```.env.defaults``` configuration
+- [x] Provide a ```.env.defaults``` configuration
 - [ ] Finish [bundle](http://bundler.io/v1.13/man/bundle.1.html) configuration
 - [ ] Setup appropriate error handling for production servers
 - [ ] Rename project and its related files to **gollum-wiki-notes**
