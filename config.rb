@@ -9,7 +9,6 @@ require 'dotenv'
 # Sources environment from .env
 Dotenv.load
 
-# Process ID
 ENV_PID_FILE = ENV["PID_FILE"] ||= './notes.pid'
 
 # Notes repo root
@@ -39,7 +38,7 @@ GOLLUM_AUTH_USERS = users
 ENV_COOKIE_SECRET = ENV['RACK_COOKIE_SECRET'] ||= 'notagoodcookiesecret'
 
 WIKI_OPTIONS = {
-  :live_preview => false,
+  :live_preview => true,
   :allow_uploads => true,
   :per_page_uploads => true,
   :show_all => true,
