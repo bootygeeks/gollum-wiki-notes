@@ -42,6 +42,7 @@ WIKI_OPTIONS = {
   :live_preview => false,
   :allow_uploads => true,
   :per_page_uploads => true,
+  :show_all => true,
   :allow_editing => true,
   :css => true,
   :js => true,
