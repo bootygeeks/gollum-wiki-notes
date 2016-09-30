@@ -1,3 +1,4 @@
+.bundle
 .babelrc
 .env
 design
@@ -10,4 +11,5 @@ package.json
 public
 *.sublime-workspace
 tmp
+vendor
 

@@ -4,6 +4,7 @@
 #
 # API route
 
+require 'rubygems'
 require 'sinatra/base'
 require './config'
 

@@ -15,8 +15,7 @@ require 'omniauth-google-oauth2'
 require './config'
 require './routes'
 
-# Dump the web serving process ID; this is necessary for our init.d
-# script, gollum-server
+# Process ID; this will be necessary for our init.d script, gollum-server
 File.open(ENV_PID_FILE, 'w') {
   |f| f.write Process.pid
 }

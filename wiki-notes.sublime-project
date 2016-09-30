@@ -15,7 +15,8 @@
         "keys",
         "node_modules",
         "tmp",
-        "third-party"
+        "third-party",
+        "vendor"
       ],
 
       "path": "."
