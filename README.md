@@ -22,7 +22,9 @@ when being installed on FreeBSD,
 
 ## TODO
 
-- [ ] rc.d script and init.d compatible scripts
+- [ ] finish up build and deploy git hooks and move said hooks to this git repository
+  1. http://unix.stackexchange.com/questions/182212/chmod-gs-command
+  * https://www.freebsd.org/doc/handbook/fs-acl.html
   * http://askubuntu.com/questions/294736/run-a-shell-script-as-another-user-that-has-no-password
 - [ ] Provide a ```.env.defaults``` configuration
 - [ ] Finish [bundle](http://bundler.io/v1.13/man/bundle.1.html) configuration
