@@ -63,6 +63,8 @@ start_gollum() {
     echo "${SCRIPT_NAME} INFO: Stopping an existing Gollum process at $PID"
     $KILL_BIN -s TERM "$(cat "${PID_FILE}")"
     rm -f "${PID_FILE}"
+  else
+    touch "${PID_FILE}"
   fi
 
   debug_info
