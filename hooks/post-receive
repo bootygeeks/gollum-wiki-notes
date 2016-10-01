@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# NOM_DEBUG=true
+NOM_DEBUG=true
 PWD=$(pwd)
 
 APP=/srv/www/wiki.imbue.studio
@@ -28,6 +28,6 @@ bundle install --deployment --verbose
 
 if [[ $? = 0 ]]; then
   ${APP}/gollum-server stop
-  ${APP}/gollum-server start  
+  ${APP}/gollum-server start
 fi
 
