@@ -8,6 +8,11 @@ GIT_DEPLOYMENT_ROOT=/usr/home/gollum/git
 
 export GIT_DIR=$GIT_DEPLOYMENT_ROOT
 export GIT_WORK_TREE=$APP
+
+# system installation of rbenv ruby and gems versions
+export RBENV_ROOT=/srv/ruby/rbenv
+eval $(rbenv init -)
+
 git checkout -f || exit 0
 cd $GIT_WORK_TREE || exit 0
 
