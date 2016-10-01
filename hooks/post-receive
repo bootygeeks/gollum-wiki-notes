@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# NOM_DEBUG=true
+PWD=$(pwd)
+
+APP=/srv/www/wiki.imbue.studio
+GIT_DEPLOYMENT_ROOT=/usr/home/gollum/git
+
+export GIT_DIR=$GIT_DEPLOYMENT_ROOT
+export GIT_WORK_TREE=$APP
+git checkout -f || exit 0
+cd $GIT_WORK_TREE || exit 0
+
+if [[ -n $NOM_DEBUG ]]; then
+  echo "USER: $USER"
+  echo "HOME: $HOME"
+  echo "PWD: $PWD"
+  echo "PATH: $PATH"
+fi
+
+bundle check
+bundle install --deployment --verbose
+
+if [[ $? = 0 ]]; then
+  ${APP}/gollum-server stop
+  ${APP}/gollum-server start  
+fi
+
