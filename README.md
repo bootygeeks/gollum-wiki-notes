@@ -14,7 +14,7 @@ Setup the environment:
 export RBENV_ROOT=/srv/ruby/rbenv
 eval $(rbenv init -)
 rbenv install 2.3.0
-rbenv local 2.3.0
+rbenv local 2.3.0 # .ruby-version
 ```
 
 Server defaults:
