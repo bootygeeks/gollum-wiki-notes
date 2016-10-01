@@ -38,7 +38,7 @@ GOLLUM_AUTH_USERS = users
 ENV_COOKIE_SECRET = ENV['RACK_COOKIE_SECRET'] ||= 'notagoodcookiesecret'
 
 WIKI_OPTIONS = {
-  :live_preview => true,
+  :live_preview => false,
   :allow_uploads => true,
   :per_page_uploads => true,
   :show_all => true,
