@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NOM_DEBUG=true
+# NOM_DEBUG=true
 PWD=$(pwd)
 
 APP=/srv/www/wiki.imbue.studio
@@ -9,9 +9,10 @@ GIT_DEPLOYMENT_ROOT=/usr/home/gollum/git
 export GIT_DIR=$GIT_DEPLOYMENT_ROOT
 export GIT_WORK_TREE=$APP
 
-# system installation of rbenv ruby and gems versions
+# system installation of rbenv 
 export RBENV_ROOT=/srv/ruby/rbenv
-eval $(rbenv init -)
+# eval "$(rbenv init -)"
+PATH=/srv/ruby/rbenv/shims:$PATH
 
 git checkout -f || exit 0
 cd $GIT_WORK_TREE || exit 0
@@ -21,13 +22,19 @@ if [[ -n $NOM_DEBUG ]]; then
   echo "HOME: $HOME"
   echo "PWD: $PWD"
   echo "PATH: $PATH"
+  echo "RUBY: $(rbenv global)"
+  echo "RUBY: $(rbenv local)"
+  echo "RUBY: $(rbenv root)"
+  echo "RUBY: $(rbenv version)"
+  echo "BIN: $(which ruby)"
+  echo "VER: $(ruby --version)"
 fi
 
-bundle check
-bundle install --deployment --verbose
+/srv/ruby/rbenv/shims/bundle check
+/srv/ruby/rbenv/shims/bundle install --deployment --verbose
 
 if [[ $? = 0 ]]; then
   ${APP}/gollum-server stop
-  ${APP}/gollum-server start
+  ${APP}/gollum-server start  
 fi
 
