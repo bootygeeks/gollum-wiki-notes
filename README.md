@@ -1,5 +1,3 @@
-README.md
-
 # Gollum Wiki Notes
 
     git clone https://github.com/i8degrees-net/gollum-wiki-notes
