@@ -22,8 +22,11 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = localhost
-DNS.2 = www.notes.syn.localnet
 DNS.2 = scorpio.syn.localnet
+DNS.3 = www.notes.syn.localnet
+DNS.4 = www.notes.dev
+
 IP.1 = 127.0.0.1
 IP.2 = 192.168.12.200
+IP.3 = 192.168.1.107
 
