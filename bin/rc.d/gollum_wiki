@@ -1,0 +1,96 @@
+#!/bin/sh
+
+# PROVIDE: gollum_wiki
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+# Add the following line to /etc/rc.conf to enable gollum_wiki:
+#
+# gollum_wiki (bool): Toggle execution of Gollum; "YES" to enable, "NO"
+# to disable. Defaults to "NO".
+#
+# gollum_wiki_args (str): Additional arguments to be passed to Gollum --
+# defaults to empty.
+#
+# gollum_wiki_root (str): Absolute path to the root web served path of the
+# Gollum wiki -- defaults to "/var/www/gollum_wiki".
+#
+# gollum_wiki_log_path (str): Absolute path to Gollum's logging directory
+# path -- defaults to "/var/log".
+#
+# gollum_wiki_pid_file (str): Absolute path to the process ID (PID) file --
+# defaults to "/var/run/gollum_wiki.pid".
+#
+# gollum_wiki_notes_repo (str): Absolute path to the git repository store for
+# the notes storage -- defaults to "~/gollum_wiki.git".
+#
+
+. /etc/rc.subr
+
+name="gollum_wiki"
+rcvar=gollum_wiki_enable
+
+load_rc_config $name
+
+: ${gollum_wiki_enable:="NO"}
+: ${gollum_wiki_args:=""}
+: ${gollum_wiki_root:="/var/www/${name}"}
+: ${gollum_wiki_log_path:="/var/log"}
+: ${gollum_wiki_pid_file:="/var/run/${name}.pid"}
+: ${gollum_wiki_notes_repo:="${HOME}/${name}.git"}
+
+RBENV_ROOT=/srv/ruby/rbenv; export RBENV_ROOT
+PATH="${RBENV_ROOT}/shims:${PATH}"
+GOLLUM_WIKI_USER="git"
+BUNDLE_CMD=${RBENV_ROOT}/shims/bundle
+BUNDLE_ARGS="${BUNDLE_CMD} exec rackup"
+
+command="/usr/sbin/daemon"
+command_args="-u ${GOLLUM_WIKI_USER} -P ${gollum_wiki_pid_file} -f ${BUNDLE_CMD} ${BUNDLE_ARGS} ${gollum_wiki_args}"
+
+start_cmd="${name}_start"
+stop_cmd="${name}_stop"
+start_precmd="${name}_prestart"
+start_postcmd="${name}_poststart"
+
+gollum_wiki_prestart() {
+  cd ${gollum_wiki_root} || exit 0
+  bundle check
+  bundle install --deployment --verbose
+
+  return 0
+}
+
+gollum_wiki_poststart() {
+  local timeout
+  timeout=15
+  while [ ! -f "${gollum_wiki_pid_file}" -a ${timeout} -gt 0 ]; do
+    timeout=$(( timeout - 1 ))
+    sleep 1
+  done
+
+  return 0
+}
+
+gollum_wiki_start() {
+  $command $command_args
+
+  return 0
+}
+
+gollum_wiki_stop() {
+  local KILL_BIN
+  KILL_BIN=/bin/kill
+
+  if [ -e "${gollum_wiki_pid_file}" ]; then
+    PID=$(cat "${gollum_wiki_pid_file}")
+
+    echo "INFO: Stopping an existing Gollum process at ${PID}."
+    $KILL_BIN -s TERM "${PID}"
+    rm -f "${gollum_wiki_pid_file}"
+  fi
+
+  return 0
+}
+
+run_rc_command "$1"
