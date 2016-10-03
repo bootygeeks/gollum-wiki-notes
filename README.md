@@ -41,6 +41,20 @@ bundle check
 bundle install --deployment
 ```
 
+```shell
+cp -av bin/rc.d/gollum_wiki /usr/local/etc/rc.d/gollum_wiki
+```
+
+/etc/rc.conf:
+
+```shell
+# gollum_wiki_enable=YES
+# gollum_wiki_root=
+# gollum_wiki_log_path=
+# gollum_wiki_pid_file=
+# gollum_wiki_notes_repo=
+```
+
 ### Startup
 
     tail -f logs/notes.log
