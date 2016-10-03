@@ -42,8 +42,8 @@ load_rc_config $name
 RBENV_ROOT=/srv/ruby/rbenv; export RBENV_ROOT
 PATH="${RBENV_ROOT}/shims:${PATH}"
 GOLLUM_WIKI_USER="git"
-BUNDLE_CMD=${RBENV_ROOT}/shims/bundle
-BUNDLE_ARGS="${BUNDLE_CMD} exec rackup"
+BUNDLE_CMD="${RBENV_ROOT}/shims/bundle"
+BUNDLE_ARGS="exec rackup"
 
 command="/usr/sbin/daemon"
 command_args="-u ${GOLLUM_WIKI_USER} -P ${gollum_wiki_pid_file} -f ${BUNDLE_CMD} ${BUNDLE_ARGS} ${gollum_wiki_args}"
