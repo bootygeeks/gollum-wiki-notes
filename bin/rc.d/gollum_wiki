@@ -55,8 +55,9 @@ start_postcmd="${name}_poststart"
 
 gollum_wiki_prestart() {
   cd ${gollum_wiki_root} || exit 0
+
   bundle check
-  bundle install --deployment --verbose
+  bundle install --verbose
 
   return 0
 }
